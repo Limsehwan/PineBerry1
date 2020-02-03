@@ -1,48 +1,44 @@
-﻿<!DOCTYPE html>
+﻿@*GetInt32를 사용하기 위해서 필수적임*@
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:800&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PineBerry_0._0._1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] -0.0.1-PineBerry</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PineBerry_0._0._1</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    @*카테고리*@
+    <div class="category">
+        <img src="https://i.ibb.co/1skjJKz/Pine-Berry-2x.png" alt="Pine-Berry-2x" class="logo" style="float:left;" border="0">
+        <a class="categorylist" style="float:left; margin:14px 0px 0px 158px;" asp-controller="Notice" asp-action="Index">Notice</a>
+        <a class="categorylist" style="float:left; margin:14px 0px 0px 30px;" asp-controller="Berries" asp-action="Index">Berries</a>
+        <a class="categorylist" style="float:left; margin:14px 0px 0px 30px" asp-controller="Calander" asp-action="Index">Calander</a>
+        <a class="categorylist" style="float:left; margin:14px 0px 0px 30px" asp-controller="QnA" asp-action="Index">Q&A</a>
+        <a class="categorylist" style="float:left; margin:14px 0px 0px 30px" asp-controller="More" asp-action="Index">More</a>
+    </div>
+
+    @if (Context.Session.GetInt32("USER_LOGIN_KEY") != null)
+    {
+        <div class="category2" style="position: relative; z-index: 2;">
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 55px;" asp-controller="Manager" asp-action="AddNotice">공지추가</a>
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 65px;" asp-controller="Manager" asp-action="AddCalendar">일정추가</a>
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 65px;" asp-controller="Manager" asp-action="AddBerry">Berry추가</a>
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 65px;" asp-controller="Manager" asp-action="ManageBerrySuggest">Berry제안관리</a>
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 65px;" asp-controller="Manager" asp-action="ManagerBan">Ban</a>
+           <a class="categorylist2" style="float:left; margin:10px 0px 8px 65px;" asp-controller="Manager" asp-action="ManagerA">계정관리</a>
+        </div>
+    }
+    <div>
+        @*내용이 나오는 부분*@
+        <main role="main">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - PineBerry_0._0._1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*나도 모르지만 있어야 함*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
